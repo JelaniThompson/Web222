@@ -82,6 +82,20 @@ let passingAverage = function () {
     } else { return false; }
 };
 
+/******************************************
+* counter()
+*
+* Purpose: Return a new function that returns a single number – one (1). However, every time this function is invoked
+(called) in the future, this function will return a number that is one greater than the previous time it was
+invoked (called). 
+******************************************/
+function counter() {
+    let count = 1;
+    return function() {
+        return count++;
+    };
+}
+
 /********************************
  *          TEST DATA           *
  *  write all of your functions *
