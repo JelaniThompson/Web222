@@ -59,8 +59,29 @@ let evenNumbers = function (minNumber, maxNumber) {
         if (minNumber % 2 === 0) { array.push(minNumber); }
     }
     return array;
-}
-    
+};
+
+/******************************************
+* passingAverage(num);
+*
+* Purpose: Return true if the average of all provided grades is greater than 49 and false if the average of all provided
+grades is less than or equal to 49. 
+******************************************/
+let passingAverage = function () {
+    let array = [];
+    for (let arg = 0; arg < arguments.length; arg++) {
+        array.push(arguments[arg]);
+    }
+
+    let sum = array.reduce (function (num1, num2) {
+        return num1 + num2;
+    }, 0);
+
+    if (sum / arguments.length > 49) {
+        return true;
+    } else { return false; }
+};
+
 /********************************
  *          TEST DATA           *
  *  write all of your functions *
