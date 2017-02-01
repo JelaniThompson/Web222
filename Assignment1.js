@@ -12,6 +12,18 @@ let grader = function(mark) {
   if (mark >= 0 && mark <= 49) { return 'F'; }
 };
 
+/******************************************
+* showMultiples(num, numMultiples);
+*
+* Purpose: Return a string that includes all the multiples of the num argument from 1 to numMultiples separated by
+newline (\n) characters (to make the output more readable)
+******************************************/
+function showMultiples(num, numMultiples) {
+  let stringArray = [];
+  for (var i = 1; i < numMultiples; i++) { stringArray.push(num * i); }
+  return stringArray;
+}
+
 /********************************
  *          TEST DATA           *
  *  write all of your functions *
