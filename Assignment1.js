@@ -36,6 +36,17 @@ let largerNum = function(num1, num2) {
   else { return NaN; }
 };
 
+/******************************************
+* tempConvert(temperature, convert);
+*
+* Purpose: Return the converted temperature (number) based on the provided temperature (ie, 78, 26, 37, etc) and the
+provided “convert” type (ie, “CF” for Celsius-to-Farenheit or “FC” for Fahrenheit-to-Celsius).
+******************************************/
+function tempConvert(temperature, convert) {
+  if (convert == 'CF') { return temperature * 9/5 + 32; }
+  else if(convert == 'FC') { return (temperature - 32) * 5/9; }
+} 
+
 /********************************
  *          TEST DATA           *
  *  write all of your functions *
