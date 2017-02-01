@@ -24,6 +24,18 @@ function showMultiples(num, numMultiples) {
   return stringArray;
 }
 
+/******************************************
+* largerNum(num1, num2);
+*
+* Purpose: Return the larger of the two numbers (number), or NaN if either num1 or num2 cannot be converted to a
+number (ie: “a”,”abc”, etc).
+******************************************/
+let largerNum = function(num1, num2) {
+  if(num1 > num2) { return num1; }
+  else if(num2 > num1) { return num2; }
+  else { return NaN; }
+};
+
 /********************************
  *          TEST DATA           *
  *  write all of your functions *
