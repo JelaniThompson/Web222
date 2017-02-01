@@ -44,9 +44,23 @@ provided “convert” type (ie, “CF” for Celsius-to-Farenheit or “FC” f
 ******************************************/
 function tempConvert(temperature, convert) {
   if (convert == 'CF') { return temperature * 9/5 + 32; }
-  else if(convert == 'FC') { return (temperature - 32) * 5/9; }
+  else if(convert == 'FC') { return Math.round((temperature - 32) * 5/9); }
 } 
 
+/******************************************
+* evenNumbers(minNumber, maxNumber);
+*
+* Purpose: Return a string containing all even numbers (inclusive) starting from the provided minNumber (ie, 4, 2, 9, etc)
+to the provided maxNumber (ie, 15, 33, 19, etc.) separated by a comma.
+******************************************/
+let evenNumbers = function (minNumber, maxNumber) {
+    let array = [];
+    for (minNumber; minNumber < maxNumber; minNumber++) {
+        if (minNumber % 2 === 0) { array.push(minNumber); }
+    }
+    return array;
+}
+    
 /********************************
  *          TEST DATA           *
  *  write all of your functions *
