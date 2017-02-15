@@ -49,8 +49,20 @@ let CustomerDB = {
     let currentTime = new Date();
     customerObj.add_date = currentTime;
     this.customers.push(customerObj.add_date);
-  }
+  },
   
+  // Take a customer id and spit their data out 
+  outputCustomerById: function(customer_id) {
+    for (var i = 0; i < allData.length; i++) {
+      if(customer_id == allData[i.data.customer_id]) {
+        console.log("Customer: " + customer_id + ": " + allData[i.data.first_name] + " " + 
+                    allData[i.data.last_name] + " (" +
+                    allData[i.data.email] + ")");
+        // Grabbing home address will be handled by getAddressById(address_id)
+        console.log("Joined: " + allData[i.data.add_date]);
+      }
+    }
+  }
 };
 
 /**********************************
