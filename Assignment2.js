@@ -35,14 +35,22 @@ let CustomerDB = {
   address: [],
   stores: [],
   insertData: function(someData) {
-    // console.log('Data has been inserted!');
-    console.dir(someData);
+    // console.log()'s will be replaced with data insertion methods
+    console.log(someData);
     for (let i = 0; i < someData.length; i++) {
       if(someData[i].type == "store") { console.log('It\'s a store! ' + someData[i].data.store_id) }
       else if(someData[i].type == "customer") { console.log('It\'s a customer! ' + someData[i].data.customer_id) }
       else if(someData[i].type == "address") { console.log('It\'s an address! ' + someData[i].data.address_id) }
     }
+  },
+  
+  // Get the customer's current time and push it to the array
+  addCustomer: function(customerObj) {
+    let currentTime = new Date();
+    customerObj.add_date = currentTime;
+    this.customers.push(customerObj.add_date);
   }
+  
 };
 
 /**********************************
