@@ -65,6 +65,7 @@ let CustomerDB = {
     }
   },
   
+// This method takes no parameters and simply outputs all customer data
   outputAllCustomers: function() {
     console.log("All Customers");
     for(var i = 0; i < allData.length; i++) {
@@ -86,8 +87,15 @@ let CustomerDB = {
             console.log('Customers in store ' + allData[i.data.name]);
       }
     }
+  },
+  
+  // Take a number representing a customer_id and searches through the customers array
+  // to remove the customer with the matching customer_id property
+  // Also make sure that the corresponding address is removed from the addresses array
+  // only if there are no customer or store objects still using it
+  removeCustomerById: function(customer_id) {
+    // Wait until addresses function is finished
   }
-};
 
 /**********************************
  *          TEST DATA             *
