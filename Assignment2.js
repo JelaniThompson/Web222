@@ -53,13 +53,37 @@ let CustomerDB = {
   
   // Take a customer id and spit their data out 
   outputCustomerById: function(customer_id) {
-    for (var i = 0; i < allData.length; i++) {
-      if(customer_id == allData[i.data.customer_id]) {
-        console.log("Customer: " + customer_id + ": " + allData[i.data.first_name] + " " + 
-                    allData[i.data.last_name] + " (" +
-                    allData[i.data.email] + ")");
+    console.log("All Customers");
+    for (var i = 0; i < customers.length; i++) {
+      if(customer_id == customers[i.data.customer_id]) {
+        console.log("Customer: " + customer_id + ": " + customers[i.data.first_name] + " " + 
+                    customers[i.data.last_name] + " (" +
+                    customers[i.data.email] + ")");
         // Grabbing home address will be handled by getAddressById(address_id)
-        console.log("Joined: " + allData[i.data.add_date]);
+        console.log("Joined: " + customers[i.data.add_date]);
+      }
+    }
+  },
+  
+  outputAllCustomers: function() {
+    console.log("All Customers");
+    for(var i = 0; i < allData.length; i++) {
+      if (i.type == "customer") {
+        console.log("Customer " + i.data.customer_id + " " + i.data.first_name + " " + 
+        i.data.last_name + " (" + i.data.email + ") ");
+        
+        // Output house address corresponding to home address
+        // Grabbing home address will also be handled by getAddressById
+        // Also do join date
+      }
+    }
+  },
+  
+  // This method takes a store_id and outputs all of the customer data for the corresponding store_id from the "customers" array
+  outputCustomersByStore: function(store_id) {
+        for (var i = 0; i < allData.length; i++) {
+          if(store_id == allData[i.data.store_id]) {
+            console.log('Customers in store ' + allData[i.data.name]);
       }
     }
   }
