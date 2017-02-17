@@ -95,7 +95,13 @@ let CustomerDB = {
   // only if there are no customer or store objects still using it
   removeCustomerById: function(customer_id) {
     // Wait until addresses function is finished
+  },
+    
+  // Add addressObj to the addresses array if its type is address
+  addAddress: function(addressObj) {
+    if(addressObj.type == "address") { addresses.push(addressObj); }
   }
+};
 
 /**********************************
  *          TEST DATA             *
