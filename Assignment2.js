@@ -54,13 +54,13 @@ let CustomerDB = {
   // Take a customer id and spit their data out 
   outputCustomerById: function(customer_id) {
     console.log("All Customers");
-    for (var i = 0; i < customers.length; i++) {
-      if(customer_id == customers[i.data.customer_id]) {
-        console.log("Customer: " + customer_id + ": " + customers[i.data.first_name] + " " + 
-                    customers[i.data.last_name] + " (" +
-                    customers[i.data.email] + ")");
+    for (var i = 0; i < this.customers.length; i++) {
+      if(customer_id == this.customers[i.data.customer_id]) {
+        console.log("Customer: " + customer_id + ": " + this.customers[i.data.first_name] + " " + 
+                    this.customers[i.data.last_name] + " (" +
+                    this.customers[i.data.email] + ")");
         // Grabbing home address will be handled by getAddressById(address_id)
-        console.log("Joined: " + customers[i.data.add_date]);
+        console.log("Joined: " + this.customers[i.data.add_date]);
       }
     }
   },
@@ -83,8 +83,8 @@ let CustomerDB = {
   // This method takes a store_id and outputs all of the customer data for the corresponding store_id from the "customers" array
   outputCustomersByStore: function(store_id) {
         for (var i = 0; i < allData.length; i++) {
-          if(store_id == allData[i.data.store_id]) {
-            console.log('Customers in store ' + allData[i.data.name]);
+          if(store_id == this.customers[i.data.store_id]) {
+            console.log('Customers in store ' + this.customers[i.data.name]);
       }
     }
   },
@@ -99,15 +99,24 @@ let CustomerDB = {
   
   // Add addressObj to the addresses array if its type is address
   addAddress: function(addressObj) {
-    if(addressObj.type == "address") { addresses.push(addressObj); }
+    if(addressObj.type == "address") { this.address.push(addressObj); }
   },
   
   // Take a number representing address_id and search through the "addresses" array to find an address object that has a matching "address_id"
   getAddressById: function(address_id) {
-    for (var i = 0; i < addresses.length; i++) {
+    for (var i = 0; i < this.address.length; i++) {
       if(address_id == addresses[i].address_id) {
         console.log(addresses[i].address_id + " in the city of " + addresses[i].city);
       }
+    }
+  },
+  
+  // Output all addresses
+  outputAllAddresses: function() {
+    console.log("All Addresses");
+    for (var i = 0; i < this.address; i++) {
+      console.log("Address " + this.address[i].address_id + ": " + this.address[i].address + " " + this.address[i].city
+      + ", " + this.address[i].province + " " + this.address[i].postal_code);
     }
   }
 };
