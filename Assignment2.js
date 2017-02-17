@@ -96,10 +96,19 @@ let CustomerDB = {
   removeCustomerById: function(customer_id) {
     // Wait until addresses function is finished
   },
-    
+  
   // Add addressObj to the addresses array if its type is address
   addAddress: function(addressObj) {
     if(addressObj.type == "address") { addresses.push(addressObj); }
+  },
+  
+  // Take a number representing address_id and search through the "addresses" array to find an address object that has a matching "address_id"
+  getAddressById: function(address_id) {
+    for (var i = 0; i < addresses.length; i++) {
+      if(address_id == addresses[i].address_id) {
+        console.log(addresses[i].address_id + " in the city of " + addresses[i].city);
+      }
+    }
   }
 };
 
