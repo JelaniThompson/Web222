@@ -105,8 +105,8 @@ let CustomerDB = {
   // Take a number representing address_id and search through the "addresses" array to find an address object that has a matching "address_id"
   getAddressById: function(address_id) {
     for (var i = 0; i < this.address.length; i++) {
-      if(address_id == addresses[i].address_id) {
-        console.log(addresses[i].address_id + " in the city of " + addresses[i].city);
+      if(address_id == this.address[i].address_id) {
+        console.log(this.address[i].address_id + " in the city of " + this.address[i].city);
       }
     }
   },
@@ -118,7 +118,27 @@ let CustomerDB = {
       console.log("Address " + this.address[i].address_id + ": " + this.address[i].address + " " + this.address[i].city
       + ", " + this.address[i].province + " " + this.address[i].postal_code);
     }
-  }
+  },
+  
+  // Search through the address array and remove any address with a matching address_id only if
+  // it isn't referenced by a customer object in the customers array or store object in the stores array
+  removeAddressById: function(address_id) {
+    // Use array.splice() to modify the values
+  },
+  
+  // Add store object to array
+  addStore: function(storeObj) {
+    if(storeObj.type == "store") { this.stores.push(storeObj); }
+  },
+  
+  // Check if ID matches and then output the store name
+  getStoreById: function(store_id) {
+    for (var i = 0; i < this.stores.length; i++) {
+      if(store_id == this.stores[i].store_id) {
+        console.log(stores[i].name);
+      }
+    }
+  },
 };
 
 /**********************************
