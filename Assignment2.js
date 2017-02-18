@@ -36,7 +36,6 @@ let CustomerDB = {
   stores: [],
   
   insertData: function(someData) {
-    // console.log()'s will be replaced with data insertion methods
     console.log(someData);
     for (let i = 0; i < someData.length; i++) {
       if(someData[i].type == "store") { this.addStore(someData[i].data); }
@@ -60,8 +59,7 @@ let CustomerDB = {
         console.log("Customer: " + customer_id + ": " + this.customers[i].data.first_name + " " + 
                     this.customers[i].data.last_name + " (" +
                     this.customers[i].data.email + ")");
-        // Grabbing home address will be handled by getAddressById(address_id)
-        //console.log(getAddressById())
+        console.log(this.customers[i].data.address + " " + this.customers[i].data.city + ", " + this.customers[i].data.province + ". " + this.customers[i].data.postal_code);
         console.log("Joined: " + this.customers[i].data.add_date);
       }
     }
@@ -73,10 +71,9 @@ let CustomerDB = {
     for(var i = 0; i < customers.length; i++) {
         console.log("Customer " + customers[i].data.customer_id + " " + customers[i].data.first_name + " " + 
         customers[i].data.last_name + " (" + customers[i].data.email + ") ");
-        
-        // Output house address corresponding to home address
-        // Grabbing home address will also be handled by getAddressById
+        console.log("Home Address: " + getAddressById(customers[i].address_id));
         // Also do join date
+        console.log("Join date: " + " " + customers[i].data.add_date);
     }
   },
   
