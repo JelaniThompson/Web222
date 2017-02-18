@@ -1,4 +1,3 @@
-
 /**********************************
  *          ALL DATA              *
  *  write your CustomerDB Object  *
@@ -35,13 +34,14 @@ let CustomerDB = {
   customers: [], 
   address: [],
   stores: [],
+  
   insertData: function(someData) {
     // console.log()'s will be replaced with data insertion methods
     console.log(someData);
     for (let i = 0; i < someData.length; i++) {
-      if(someData[i].type == "store") { console.log('It\'s a store! ' + someData[i].data.store_id) }
-      else if(someData[i].type == "customer") { console.log('It\'s a customer! ' + someData[i].data.customer_id) }
-      else if(someData[i].type == "address") { console.log('It\'s an address! ' + someData[i].data.address_id) }
+      if(someData[i].type == "store") { this.addStore(someData[i].data); }
+      else if(someData[i].type == "customer") { this.addCustomer(someData[i].data); }
+      else if(someData[i].type == "address") { this.addAddress(someData[i].data); }
     }
   },
   
@@ -147,7 +147,7 @@ let CustomerDB = {
       console.log("Store " + stores[i].data.store_id + ": " + stores[i].data.name);
       console.log("Location: " + getAddressById(stores[i].data.address_id));
     }
-  },
+  }
 };
 
 /**********************************
