@@ -1,3 +1,13 @@
+/*********************************************************************************
+* WEB222 – Assignment 02
+* I declare that this assignment is my own work in accordance with Seneca Academic Policy.
+* No part of this assignment has been copied manually or electronically from any other source
+* (including web sites) or distributed to other students.
+*
+* Name: Jelani Thompson Student ID: 109891168 Date: Sunday, February 19, 2016
+*
+********************************************************************************/
+
 /**********************************
  *          ALL DATA              *
  *  write your CustomerDB Object  *
@@ -117,23 +127,25 @@ let CustomerDB = {
   // Take a number representing address_id and search through the "addresses" array to find an address object that has a matching "address_id"
   getAddressById: function(address_id) {
     for(var i = 0; i < this.address.length; i++) {
-      if(address_id == this.address[i].address_id){ return this.address[i]; }
+      if (address_id == this.address[i].address_id) { return this.address[i]; }
     }
   },
   
   // Output all addresses
   outputAllAddresses: function() {
     console.log("All Addresses");
-    for (var i = 0; i < this.address; i++) {
-      console.log("Address " + this.address[i].data.address_id + ": " + this.address[i].data.address + " " + this.address[i].data.city
-      + ", " + this.address[i].data.province + " " + this.address[i].data.postal_code);
+    for (var i = 0; i < this.address.length; i++) {
+      console.log("Address " + this.address[i].address_id + ": " + this.address[i].address + " " + this.address[i].city
+      + ", " + this.address[i].province + " " + this.address[i].postal_code + "\n");
     }
   },
   
   // Search through the address array and remove any address with a matching address_id only if
   // it isn't referenced by a customer object in the customers array or store object in the stores array
   removeAddressById: function(address_id) {
-    // Use array.splice() to modify the values
+    for (var i = 0; i < this.address.length; i++) {
+      if(address_id == this.address[i].address_id) { this.address.splice(i, 1); }
+    }
   },
   
   // Add store object to array
@@ -152,10 +164,11 @@ let CustomerDB = {
   
   // Output all stores
   outputAllStores: function() {
-    console.log("All Stores");
-    for (var i = 0; i < this.stores; i++) {
-      console.log("Store " + stores[i].data.store_id + ": " + stores[i].data.name);
-      console.log("Location: " + getAddressById(stores[i].data.address_id));
+    console.log("All Stores \n");
+    for (var i = 0; i < this.stores.length; i++) {
+      console.log("Store " + this.stores[i].store_id + " " + this.stores[i].name);
+      let storeLocation = this.getAddressById(this.stores[i].address_id);
+      console.log("Location: " + storeLocation.address + " " + storeLocation.city + ", " + storeLocation.province + ". " + storeLocation.postal_code + "\n");
     }
   }
 };
