@@ -68,12 +68,11 @@ let CustomerDB = {
 // This method takes no parameters and simply outputs all customer data
   outputAllCustomers: function() {
     console.log("All Customers");
-    for(var i = 0; i < customers.length; i++) {
-        console.log("Customer " + customers[i].data.customer_id + " " + customers[i].data.first_name + " " + 
-        customers[i].data.last_name + " (" + customers[i].data.email + ") ");
-        console.log("Home Address: " + getAddressById(customers[i].address_id));
-        // Also do join date
-        console.log("Join date: " + " " + customers[i].data.add_date);
+    for(var i = 0; i < this.customers.length; i++) {
+        // console.log("Customer " + this.customers[i].data.customer_id + " " + this.customers[i].data.first_name + " " + 
+        // this.customers[i].data.last_name + " (" + this.customers[i].data.email + ") ");
+        console.log("Home Address: " + this.getAddressById(this.customers[i].address_id));
+        console.log("Join date: " + " " + this.customers[i].data.add_date);
     }
   },
   
@@ -165,12 +164,10 @@ let CustomerDB = {
  *  correctness                   *
  **********************************/
 
-
-
 // Insert all Data into the Database
 
 CustomerDB.insertData(allData);
-/*
+
 // output all customers
 
 console.log("CustomerDB.outputAllCustomers();\n\n--------------------------\n\n");
@@ -215,5 +212,3 @@ console.log("--------------------------\n\n");
 console.log("CustomerDB.outputAllAddresses();\n\n--------------------------\n\n");
 CustomerDB.outputAllAddresses();
 console.log("--------------------------\n\n"); 
-
-*/
