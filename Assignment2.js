@@ -66,8 +66,8 @@ let CustomerDB = {
   },
   
 // This method takes no parameters and simply outputs all customer data
-  outputAllCustomers: function(){
-    console.log("All Customers");
+  outputAllCustomers: function() {
+    console.log("All Customers" + '\n');
     for(var i = 0; i < this.customers.length; i++){
         console.log("Customer " + this.customers[i].customer_id + ": " + this.customers[i].first_name + " " + this.customers[i].last_name + " (" + this.customers[i].email + ")");
         
@@ -81,9 +81,22 @@ let CustomerDB = {
   
   // This method takes a store_id and outputs all of the customer data for the corresponding store_id from the "customers" array
   outputCustomersByStore: function(store_id) {
-        for (var i = 0; i < customers.length; i++) {
-          if(store_id == this.customers[i].data.store_id) {
-            console.log('Customers in store ' + this.customers[i].data.name);
+    let nameOfStore = '';
+    for(var j = 0; j < this.stores.length; j++) {
+      if (this.stores[j].store_id == store_id) { nameOfStore = this.stores[j].name; }
+    }
+    
+    console.log("Customers in Store: " + nameOfStore + '\n');
+    
+    for(var i = 0; i < this.customers.length; i++){
+      if(store_id == this.customers[i].store_id){
+        console.log("Customer " + this.customers[i].customer_id + ": " + this.customers[i].first_name + " " + this.customers[i].last_name + "  (" + this.customers[i].email + ")");
+      
+      var customerAddress = this.getAddressById(this.customers[i].address_id);
+        console.log("Home Address: " + customerAddress.address + " " + customerAddress.city + ", " + customerAddress.province + ". " + customerAddress.postal_code);
+        
+        
+        console.log("Joined: " + this.customers[i].add_date + '\n');
       }
     }
   },
@@ -93,15 +106,13 @@ let CustomerDB = {
   // Also make sure that the corresponding address is removed from the addresses array
   // only if there are no customer or store objects still using it
  removeCustomerById: function(customer_id){
-    for (var i = 0; i < this.customer.length; i++) {
-      if(customer_id == this.customer[i].customer_id) { this.customer.splice(i, 1); }
+    for (var i = 0; i < this.customers.length; i++) {
+      if(customer_id == this.customers[i].customer_id) { this.customers.splice(i, 1); }
     }
   },
   
   // Add addressObj to the addresses array if its type is address
-  addAddress: function(addressObj) {
-    this.address.push(addressObj);
-  },
+  addAddress: function(addressObj) { this.address.push(addressObj); },
   
   // Take a number representing address_id and search through the "addresses" array to find an address object that has a matching "address_id"
   getAddressById: function(address_id) {
