@@ -83,7 +83,7 @@ let CustomerDB = {
         
         let customerAddress = this.getAddressById(this.customers[i].address_id);
     
-        console.log("Home Address: " + customerAddress.address + " " + customerAddress.city + ", " + customerAddress.province + ". " + customerAddress.postal_code);
+        console.log("Home Address: " + this.customers[i].address + " " + this.customers[i].city + ", " + this.customers[i].province + ". " + this.customers[i].postal_code);
         
         console.log("Joined: " + this.customers[i].add_date + '\n');
     }
@@ -111,13 +111,13 @@ let CustomerDB = {
     }
   },
   
-  // Take a number representing a customer_id and searches through the customers array
-  // to remove the customer with the matching customer_id property
-  // Also make sure that the corresponding address is removed from the addresses array
-  // only if there are no customer or store objects still using it
+ // Remove customer by id
  removeCustomerById: function(customer_id){
     for (var i = 0; i < this.customers.length; i++) {
-      if(customer_id == this.customers[i].customer_id) { this.customers.splice(i, 1); }
+      if (customer_id == this.customers[i].customer_id) { 
+        this.customers.splice(i, 1); 
+        this.removeAddressById(this.customers[i].address_id);
+      }
     }
   },
   
@@ -140,11 +140,24 @@ let CustomerDB = {
     }
   },
   
-  // Search through the address array and remove any address with a matching address_id only if
-  // it isn't referenced by a customer object in the customers array or store object in the stores array
-  removeAddressById: function(address_id) {
-    for (var i = 0; i < this.address.length; i++) {
-      if(address_id == this.address[i].address_id) { this.address.splice(i, 1); }
+  // Search through the address array and remove any address with a matching address_id only if it isn't referenced by a customer object in the customers array or store object in the stores array
+  removeAddressById: function ( address_id ) {
+    let count1 = 0,
+        count2 = 0;
+    
+    for (var i = 0; i < this.customers.length; i++) {
+      if (address_id == this.customers[i].address_id ) { count1++; }
+    }
+    
+    for (var m = 0; m < this.stores.length; m++){
+      if (address_id == this.stores[m].address_id) { count2++; }
+    }
+    
+    if (count1 === 1 && count2 === 0) {      
+      for (var n = 0; n < this.address.length; n++){
+        if (address_id == this.address[n].address_id)
+          this.address.splice(n,1);
+      }
     }
   },
   
