@@ -1,239 +1,175 @@
 /*********************************************************************************
-* WEB222 – Assignment 02
-* I declare that this assignment is my own work in accordance with Seneca Academic Policy.
-* No part of this assignment has been copied manually or electronically from any other source
-* (including web sites) or distributed to other students.
+* WEB222 – Assignment 01
+* I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part of this
+* assignment has been copied manually or electronically from any other source (including web sites) or
+* distributed to other students.
 *
-* Name: Jelani Thompson Student ID: 109891168 Date: Sunday, February 19, 2016
+* Name: Jelani Thompson Student ID: 109891168 Date: Wednesday, February 1, 2017
 *
 ********************************************************************************/
-
-/**********************************
- *          ALL DATA              *
- *  write your CustomerDB Object  *
- *      BELOW this Object         *
- **********************************/
-
-var allData = [
-    {type:"store", data:{store_id: 297, name: "Scotiabank - Main Branch", address_id: 1023}},
-    {type:"store", data:{store_id: 614, name: "Scotiabank - Hamilton", address_id: 1984}},
-    {type:"store", data:{store_id: 193, name: "Scotiabank - Mississauga", address_id: 1757}},
-    {type:"customer", data:{customer_id: 26, store_id:297, first_name: "Dave", last_name: "Bennett", email: "dbennett@gmail.com", address_id: 4536, add_date: null}},
-    {type:"customer", data:{customer_id: 59, store_id:193, first_name: "John", last_name: "Stevens", email: "jstevens22@hotmail.com", address_id: 2473, add_date: null}},
-    {type:"customer", data:{customer_id: 29, store_id:614, first_name: "Sarah", last_name: "Pym", email: "spym99@hotmail.com", address_id: 1611, add_date: null}},
-    {type:"customer", data:{customer_id: 63, store_id:297, first_name: "Steven", last_name: "Edwards", email: "steven2231@hotmail.com", address_id: 1836, add_date: null}},
-    {type:"customer", data:{customer_id: 71, store_id:614, first_name: "Martin", last_name: "Scott", email: "mdog33@gmail.com", address_id: 2727, add_date: null}},
-    {type:"customer", data:{customer_id: 24, store_id:614, first_name: "Jonathan", last_name: "Pym", email: "jjpym@yahoo.ca", address_id: 1611, add_date: null}},
-    {type:"customer", data:{customer_id: 36, store_id:193, first_name: "Kaitlyn", last_name: "Adams", email: "katy38@hotmail.com", address_id: 5464, add_date: null}},
-    {type:"customer", data:{customer_id: 73, store_id:297, first_name: "Melissa", last_name: "Bennett", email: "mbennett@gmail.com", address_id: 4536, add_date: null}},         
-    {type:"address", data:{address_id: 1023, address: "2895 Yonge St.", city:"Toronto", province:"ON", postal_code:"L4C02G"}},
-    {type:"address", data:{address_id: 1984, address: "3611 Main St. West", city:"Hamilton", province:"ON", postal_code:"R5O8H5"}},
-    {type:"address", data:{address_id: 1757, address: "1177 Ontario St. Unit 8", city:"Mississauga", province:"ON", postal_code:"L9H6B3"}},
-    {type:"address", data:{address_id: 4536, address: "3945 John St.", city: "Ajax", province: "ON", postal_code: "L7M4T9"}},
-    {type:"address", data:{address_id: 2473, address: "391 Baker St. Apt 231", city: "Mississauga", province: "ON", postal_code: "M4T8S3"}},
-    {type:"address", data:{address_id: 1611, address: "183 City Ct.", city: "Hamilton", province: "ON", postal_code: "J3T9V2"}},
-    {type:"address", data:{address_id: 1836, address: "67 Rhymer Ave.", city: "Stouffville", province: "ON", postal_code: "L3C8H4"}},
-    {type:"address", data:{address_id: 2727, address: "287 Brant St. Apt 4A", city: "Waterdown", province: "ON", postal_code: "R93G3P"}},
-    {type:"address", data:{address_id: 5464, address: "11 New St. Apt 2B", city: "Brampton", province: "ON", postal_code: "L694R7"}},
-];
-
-/*  Write your CustomerDB Object Here.  Do not forget to uncomment the "TEST DATA" section
-     when you're ready.  Your code is required to run against these tests before you submit */
-
-let CustomerDB = {
-  customers: [], 
-  address: [],
-  stores: [],
-  
-  insertData: function(someData) {
-    // console.log(someData);
-    for (let i = 0; i < someData.length; i++) {
-      if (someData[i].type == "store") { this.addStore(someData[i].data); }
-      else if (someData[i].type == "customer") { this.addCustomer(someData[i].data); }
-      else if (someData[i].type == "address") { this.addAddress(someData[i].data); }
-    }
-  },
-  
-  // Get the customer's current time and push it to the array
-  addCustomer: function(customerObj) {
-    let currentTime = new Date();
-    customerObj.add_date = currentTime;
-    this.customers.push(customerObj);
-  },
-  
-  // Take a customer id and spit their data out 
-  outputCustomerById: function(customer_id) {
-    console.log("All Customers");
-    for (var i = 0; i < this.customers.length; i++) {
-      if(customer_id == this.customers[i].data.customer_id) {
-        console.log("Customer: " + customer_id + ": " + this.customers[i].data.first_name + " " + 
-                    this.customers[i].data.last_name + " (" +
-                    this.customers[i].data.email + ")");
-        console.log(this.customers[i].data.address + " " + this.customers[i].data.city + ", " + this.customers[i].data.province + ". " + this.customers[i].data.postal_code);
-        console.log("Joined: " + this.customers[i].data.add_date);
-      }
-    }
-  },
-  
-// This method takes no parameters and simply outputs all customer data
-  outputAllCustomers: function() {
-    console.log("All Customers" + '\n');
-    for(var i = 0; i < this.customers.length; i++){
-        console.log("Customer " + this.customers[i].customer_id + ": " + this.customers[i].first_name + " " + this.customers[i].last_name + " (" + this.customers[i].email + ")");
-        
-        let customerAddress = this.getAddressById(this.customers[i].address_id);
-    
-        console.log("Home Address: " + customerAddress.address + " " + customerAddress.city + ", " + customerAddress.province + ". " + customerAddress.postal_code);
-        
-        console.log("Joined: " + this.customers[i].add_date + '\n');
-    }
-  },
-  
-  // This method takes a store_id and outputs all of the customer data for the corresponding store_id from the "customers" array
-  outputCustomersByStore: function(store_id) {
-    let nameOfStore = '';
-    for(var j = 0; j < this.stores.length; j++) {
-      if (this.stores[j].store_id == store_id) { nameOfStore = this.stores[j].name; }
-    }
-    
-    console.log("Customers in Store: " + nameOfStore + '\n');
-    
-    for(var i = 0; i < this.customers.length; i++){
-      if(store_id == this.customers[i].store_id){
-        console.log("Customer " + this.customers[i].customer_id + ": " + this.customers[i].first_name + " " + this.customers[i].last_name + "  (" + this.customers[i].email + ")");
-      
-      var customerAddress = this.getAddressById(this.customers[i].address_id);
-        console.log("Home Address: " + customerAddress.address + " " + customerAddress.city + ", " + customerAddress.province + ". " + customerAddress.postal_code);
-        
-        
-        console.log("Joined: " + this.customers[i].add_date + '\n');
-      }
-    }
-  },
-  
-  // Take a number representing a customer_id and searches through the customers array
-  // to remove the customer with the matching customer_id property
-  // Also make sure that the corresponding address is removed from the addresses array
-  // only if there are no customer or store objects still using it
- removeCustomerById: function(customer_id){
-    for (var i = 0; i < this.customers.length; i++) {
-      if(customer_id == this.customers[i].customer_id) { this.customers.splice(i, 1); }
-    }
-  },
-  
-  // Add addressObj to the addresses array if its type is address
-  addAddress: function(addressObj) { this.address.push(addressObj); },
-  
-  // Take a number representing address_id and search through the "addresses" array to find an address object that has a matching "address_id"
-  getAddressById: function(address_id) {
-    for(var i = 0; i < this.address.length; i++) {
-      if (address_id == this.address[i].address_id) { return this.address[i]; }
-    }
-  },
-  
-  // Output all addresses
-  outputAllAddresses: function() {
-    console.log("All Addresses");
-    for (var i = 0; i < this.address.length; i++) {
-      console.log("Address " + this.address[i].address_id + ": " + this.address[i].address + " " + this.address[i].city
-      + ", " + this.address[i].province + " " + this.address[i].postal_code + "\n");
-    }
-  },
-  
-  // Search through the address array and remove any address with a matching address_id only if
-  // it isn't referenced by a customer object in the customers array or store object in the stores array
-  removeAddressById: function(address_id) {
-    for (var i = 0; i < this.address.length; i++) {
-      if(address_id == this.address[i].address_id) { this.address.splice(i, 1); }
-    }
-  },
-  
-  // Add store object to array
-  addStore: function(storeObj) {
-    this.stores.push(storeObj);
-  },
-  
-  // Check if ID matches and then output the store name
-  getStoreById: function(store_id) {
-    for (var i = 0; i < this.stores.length; i++) {
-      if(store_id == this.stores[i].data.store_id) {
-        console.log(stores[i].data.name);
-      }
-    }
-  },
-  
-  // Output all stores
-  outputAllStores: function() {
-    console.log("All Stores \n");
-    for (var i = 0; i < this.stores.length; i++) {
-      console.log("Store " + this.stores[i].store_id + " " + this.stores[i].name);
-      let storeLocation = this.getAddressById(this.stores[i].address_id);
-      console.log("Location: " + storeLocation.address + " " + storeLocation.city + ", " + storeLocation.province + ". " + storeLocation.postal_code + "\n");
-    }
-  }
+'use strict';
+/******************************************
+* grader(mark);
+*
+* Purpose: Return the calculated letter grade (string) based on the provided percentage grade (mark).
+******************************************/
+let grader = function(mark) {
+  if (mark >= 80 && mark <= 100) { return 'A'; }
+  if (mark >= 70 && mark <= 79) { return 'B'; }
+  if (mark >= 60 && mark <= 69) { return 'C'; }
+  if (mark >= 50 && mark <= 59) { return 'D'; }
+  if (mark >= 0 && mark <= 49) { return 'F'; }
 };
 
-/**********************************
- *          TEST DATA             *
- *  write your CustomerDB Object  *
- *      ABOVE this code           *
- *                                *
- *  Uncomment this block of code  *
- *  when you're ready to test     *
- *  your CustomerDB Object        *
- *                                *
- *  You MUST Hand in your code    *
- *  with the test data            *
- *  uncommented, as this will     *
- *  help check your code for      *
- *  correctness                   *
- **********************************/
+/******************************************
+* showMultiples(num, numMultiples);
+*
+* Purpose: Return a string that includes all the multiples of the num argument from 1 to numMultiples separated by
+newline (\n) characters (to make the output more readable)
+******************************************/
+function showMultiples(num, numMultiples) {
+  let stringArray = [];
+  for (var i = 1; i < numMultiples; i++) { stringArray.push(num * i); }
+  return stringArray;
+}
 
-// Insert all Data into the Database
+/******************************************
+* largerNum(num1, num2);
+*
+* Purpose: Return the larger of the two numbers (number), or NaN if either num1 or num2 cannot be converted to a
+number (ie: “a”,”abc”, etc).
+******************************************/
+let largerNum = function(num1, num2) {
+  if(num1 > num2) { return num1; }
+  else if(num2 > num1) { return num2; }
+  else { return NaN; }
+};
 
-CustomerDB.insertData(allData);
+/******************************************
+* tempConvert(temperature, convert);
+*
+* Purpose: Return the converted temperature (number) based on the provided temperature (ie, 78, 26, 37, etc) and the
+provided “convert” type (ie, “CF” for Celsius-to-Farenheit or “FC” for Fahrenheit-to-Celsius).
+******************************************/
+function tempConvert(temperature, convert) {
+  if (convert == 'CF') { return temperature * 9/5 + 32; }
+  else if(convert == 'FC') { return Math.round((temperature - 32) * 5/9); }
+} 
 
-// output all customers
+/******************************************
+* evenNumbers(minNumber, maxNumber);
+*
+* Purpose: Return a string containing all even numbers (inclusive) starting from the provided minNumber (ie, 4, 2, 9, etc)
+to the provided maxNumber (ie, 15, 33, 19, etc.) separated by a comma.
+******************************************/
+let evenNumbers = function (minNumber, maxNumber) {
+    let array = [];
+    for (minNumber; minNumber < maxNumber; minNumber++) {
+        if (minNumber % 2 === 0) { array.push(minNumber); }
+    }
+    return array;
+};
 
-console.log("CustomerDB.outputAllCustomers();\n\n--------------------------\n\n");
-CustomerDB.outputAllCustomers();
-console.log("--------------------------\n\n");
+/******************************************
+* passingAverage(num);
+*
+* Purpose: Return true if the average of all provided grades is greater than 49 and false if the average of all provided
+grades is less than or equal to 49. 
+******************************************/
+let passingAverage = function () {
+    let array = [];
+    for (let arg = 0; arg < arguments.length; arg++) {
+        array.push(arguments[arg]);
+    }
 
-// output all addresses
+    let sum = array.reduce (function (num1, num2) {
+        return num1 + num2;
+    }, 0);
 
-console.log("CustomerDB.outputAllAddresses();\n\n--------------------------\n\n");
-CustomerDB.outputAllAddresses();
-console.log("--------------------------\n\n"); 
+    if (sum / arguments.length > 49) {
+        return true;
+    } else { return false; }
+};
 
-// output all stores
+/******************************************
+* counter()
+*
+* Purpose: Return a new function that returns a single number – one (1). However, every time this function is invoked
+(called) in the future, this function will return a number that is one greater than the previous time it was
+invoked (called). 
+******************************************/
+function counter() {
+    let count = 1;
+    return function() {
+        return count++;
+    };
+}
 
-console.log("CustomerDB.outputAllStores();\n\n--------------------------\n\n");
-CustomerDB.outputAllStores();
-console.log("--------------------------\n\n"); 
+/********************************
+ *          TEST DATA           *
+ *  write all of your functions *
+ *      ABOVE this comment      *
+ *                              *
+ *  NOTE: the code below simply *
+ *  invokes each function to    *
+ *  show the result - it does   *
+ *  not state whether the       *
+ *  output is correct or not    *
+ ********************************/
 
-// output all customers in the "Main Branch"
+// Function 1 (grader)   
 
-console.log("CustomerDB.outputCustomersByStore(297);\n\n--------------------------\n\n");
-CustomerDB.outputCustomersByStore(297);
-console.log("--------------------------\n\n"); 
+console.log('grader(53) returns: ' + grader(53));
+console.log('grader(72) returns: ' + grader(72));
+console.log('grader(91) returns: ' + grader(91));
 
-// remove Customer Dave Bennett (customer_id 26) and Martin Scott (customer_id 71)
+console.log("\n");
 
-console.log("CustomerDB.removeCustomerById(26);\nCustomerDB.removeCustomerById(71);\n\n");
-CustomerDB.removeCustomerById(26);
-CustomerDB.removeCustomerById(71);
-console.log("--------------------------\n\n"); 
+// Function 2 (showMultiples)
 
-// output all customers again
-// NOTE: Dave Bennett and Martin Scott should be missing
+console.log('showMultiples(2,8) returns: ' + showMultiples(2,8));
+console.log('showMultiples(3,2) returns: ' + showMultiples(3,2));
+console.log('showMultiples(5,4) returns: ' + showMultiples(5,4));
 
-console.log("CustomerDB.outputAllCustomers();\n\n--------------------------\n\n");
-CustomerDB.outputAllCustomers();
-console.log("--------------------------\n\n");
+console.log("\n");
 
-// output all addresses again
-// NOTE: only addrss 287 Brant St. Apt 4A Waterdown, ON. R93G3P should be missing
+// Function 3 (largerNum)
+  
+console.log('largerNum(2095,106) returns: ' + largerNum(2095,106));
+console.log('largerNum("23",14) returns: ' + largerNum("23",14));
+console.log('largerNum(108,"a") returns: ' + largerNum(108,"a"));
 
-console.log("CustomerDB.outputAllAddresses();\n\n--------------------------\n\n");
-CustomerDB.outputAllAddresses();
-console.log("--------------------------\n\n"); 
+console.log("\n");
+
+// Function 4 (tempConvert)
+
+console.log('tempConvert(22,"CF") returns: ' + tempConvert(22,"CF"));
+console.log('tempConvert(76,"FC") returns: ' + tempConvert(76,"FC"));
+console.log('tempConvert(16,"CF") returns: ' + tempConvert(16,"CF"));
+
+console.log("\n");
+
+// Function 5 (evenNumbers)
+
+console.log('evenNumbers(4,13) returns: ' + evenNumbers(4,13));
+console.log('evenNumbers(3,10) returns: ' + evenNumbers(3,10));
+console.log('evenNumbers(8,21) returns: ' + evenNumbers(8,21));
+
+console.log("\n");
+
+// Function 6 (passingAverage)
+
+console.log('passingAverage(75,42,98) returns: ' + passingAverage(75,42,98));
+console.log('passingAverage(34,93,77,89,49) returns: ' + passingAverage(34,93,77,89,49));
+console.log('passingAverage(33,61) returns: ' + passingAverage(33,61));
+
+console.log("\n");
+
+// Functinon 7 (counter)
+
+var count = counter();
+
+console.log('counter() returns: ' + count);
+console.log('invoking the function returns: ' + count());
+console.log('invoking the function returns: ' + count());
+console.log('invoking the function returns: ' + count());
