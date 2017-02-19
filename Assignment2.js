@@ -36,11 +36,11 @@ let CustomerDB = {
   stores: [],
   
   insertData: function(someData) {
-    console.log(someData);
+    // console.log(someData);
     for (let i = 0; i < someData.length; i++) {
-      if(someData[i].type == "store") { this.addStore(someData[i].data); }
-      else if(someData[i].type == "customer") { this.addCustomer(someData[i].data); }
-      else if(someData[i].type == "address") { this.addAddress(someData[i].data); }
+      if (someData[i].type == "store") { this.addStore(someData[i].data); }
+      else if (someData[i].type == "customer") { this.addCustomer(someData[i].data); }
+      else if (someData[i].type == "address") { this.addAddress(someData[i].data); }
     }
   },
   
@@ -48,7 +48,7 @@ let CustomerDB = {
   addCustomer: function(customerObj) {
     let currentTime = new Date();
     customerObj.add_date = currentTime;
-    this.customers.push(customerObj.add_date);
+    this.customers.push(customerObj);
   },
   
   // Take a customer id and spit their data out 
@@ -66,13 +66,16 @@ let CustomerDB = {
   },
   
 // This method takes no parameters and simply outputs all customer data
-  outputAllCustomers: function() {
+  outputAllCustomers: function(){
     console.log("All Customers");
-    for(var i = 0; i < this.customers.length; i++) {
-        // console.log("Customer " + this.customers[i].data.customer_id + " " + this.customers[i].data.first_name + " " + 
-        // this.customers[i].data.last_name + " (" + this.customers[i].data.email + ") ");
-        console.log("Home Address: " + this.getAddressById(this.customers[i].address_id));
-        console.log("Join date: " + " " + this.customers[i].data.add_date);
+    for(var i = 0; i < this.customers.length; i++){
+        console.log("Customer " + this.customers[i].customer_id + ": " + this.customers[i].first_name + " " + this.customers[i].last_name + " (" + this.customers[i].email + ")");
+        
+        let customerAddress = this.getAddressById(this.customers[i].address_id);
+    
+        console.log("Home Address: " + customerAddress.address + " " + customerAddress.city + ", " + customerAddress.province + ". " + customerAddress.postal_code);
+        
+        console.log("Joined: " + this.customers[i].add_date + '\n');
     }
   },
   
@@ -97,15 +100,13 @@ let CustomerDB = {
   
   // Add addressObj to the addresses array if its type is address
   addAddress: function(addressObj) {
-    if(addressObj.type == "address") { this.address.push(addressObj); }
+    this.address.push(addressObj);
   },
   
   // Take a number representing address_id and search through the "addresses" array to find an address object that has a matching "address_id"
   getAddressById: function(address_id) {
-    for (var i = 0; i < this.address.length; i++) {
-      if(address_id == this.address[i].data.address_id) {
-        return this.address[i].data.address_id + " in the city of " + this.address[i].data.city;
-      }
+    for(var i = 0; i < this.address.length; i++) {
+      if(address_id == this.address[i].address_id){ return this.address[i]; }
     }
   },
   
@@ -126,7 +127,7 @@ let CustomerDB = {
   
   // Add store object to array
   addStore: function(storeObj) {
-    if(storeObj.type == "store") { this.stores.push(storeObj); }
+    this.stores.push(storeObj);
   },
   
   // Check if ID matches and then output the store name
