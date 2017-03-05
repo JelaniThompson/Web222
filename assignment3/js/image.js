@@ -1,4 +1,11 @@
 // Data for the "HTML Images" Page
+window.onload = function() {
+    let images = document.querySelector('#images'), photoreel=document.querySelector('#photo-reel');
+    let ICT = "<img src='img/ict.png' alt='ICT School, Seneca College'>";
+    let imgStart = "<img src=";
+
+    images.innerHTML += ICT;
+}
 
 var images = [
     {caption: "Red Slate Mountain", alt: "Mountain", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Red_Slate_Mountain_1.jpg/320px-Red_Slate_Mountain_1.jpg"},
@@ -7,3 +14,9 @@ var images = [
     {caption: "Azerbaijan Forest", alt: "Forest", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Azerbaijan_forest_3.JPG/320px-Azerbaijan_forest_3.JPG"},
     {caption: "Indonesian Jungle", alt: "Jungle", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Indonesian_jungle3%2C_Zoo_Prague.jpg/320px-Indonesian_jungle3%2C_Zoo_Prague.jpg"}
 ];
+
+for (var i = 0; i < images.length; i++) {
+    let figure = "<figure caption='" + images[i].caption +
+                        "' alt='" + images[i].alt +
+                        "' url='" + images[i].url + "'</figure>";
+}
