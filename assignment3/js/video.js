@@ -5,13 +5,11 @@ window.onload = function() {
 
     for (var i = 0; i < video.source.length; i++) {
         videoStart += " width='" + video.width + "' height='" + video.height + "' controls>";
-        for (var i = 0; i < video.source.length; i++) {
             videoStart += "<source src='" + video.source[i].src + "' type='" + video.source[i].type + "' ";
                 videoStart += videoEnd;
-    videos.innerHTML = videoStart;
+                videos.innerHTML = videoStart;
         }
     }
-}
 
 var video = {
     controls: true, 
