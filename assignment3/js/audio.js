@@ -1,4 +1,14 @@
 // Data for the "HTML Audio" Page
+window.onload = function() {
+    let audioSection = document.querySelector('#MAEK-NOISE');
+    let string = "";
+
+    for (var i = 0; i < audio.source.length; i++) {
+        string += "<audio controls><source src='" + audio.source[i].src + "' type='" + audio.source[i].type + "'></audio>";
+    }
+
+    audioSection.innerHTML += string;
+}
 
 var audio = {
     controls: true, 
