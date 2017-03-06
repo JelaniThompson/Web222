@@ -1,6 +1,6 @@
 // Data for the "HTML Audio" Page
 window.onload = function() {
-    let audioSection = document.querySelector('#MAEK-NOISE');
+    let audioSection = document.querySelector('#maek-noise');
     let string = "";
 
     for (var i = 0; i < audio.source.length; i++) {
